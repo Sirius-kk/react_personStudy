@@ -2,7 +2,7 @@
  * @Author: Sirius-kk
  * @Date: 2022-06-16 08:13:21
  * @LastEditors: Sirius-kk
- * @LastEditTime: 2022-06-17 08:22:48
+ * @LastEditTime: 2022-06-19 23:00:13
  * @FilePath: \React_basic\non-application\demo6-事件处理\index.html
 -->
 <!-- 
@@ -49,9 +49,7 @@
         };
         this.handleClick = this.handleClick.bind(this);
       }
-      handleClick(e) {
-        console.log("🚀 => e", e)
-        console.log(this)
+      handleClick(id, e) {
         this.setState({
           isToggleOn: !this.state.isToggleOn
         })
@@ -70,7 +68,8 @@
 
       render() {
         // return <button onClick={(e) => this.handleClick.call(this, e)}>
-        return <button onClick={this.handleClick}>
+        // return <button onClick={(e) => this.handleClick(123, e)}>
+        return <button onClick={this.handleClick.bind(this, 234)}>
           {this.state.isToggleOn ? 'OFF' : 'ON'}
         </button>
       }
