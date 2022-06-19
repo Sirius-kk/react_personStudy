@@ -1,0 +1,91 @@
+<!--
+ * @Author: Sirius-kk
+ * @Date: 2022-06-08 09:26:38
+ * @LastEditors: Sirius-kk
+ * @LastEditTime: 2022-06-16 08:10:31
+ * @FilePath: \React_basic\non-application\demo5-state&生命周期\index.html
+-->
+<!-- 
+  将函数组件转化为class组件
+  向class组件中添加局部的state
+  将生命周期添加到class中
+
+  正确的使用state
+    不要直接修改state
+    state的更新可能是异步的
+    state的更新会被合并
+  数据是向下流动的
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>demo5-state&生命周期</title>
+</head>
+
+<body>
+
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+
+    function FormattedDate(props) {
+
+      return <h3>FormattedDate. It is {props.date.toLocaleTimeString()}</h3>
+    }
+
+    class Clock extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          date: new Date()
+        }
+      };
+      // --------- 生命周期 ---------
+      componentDidMount() {
+        this.timerId = setInterval(() => {
+          this.tick()
+        }, 1000)
+      }
+
+      componentWillUnmount() {
+        clearInterval(this.timerId)
+      }
+
+      // -------- 原型方法 -------
+      tick() {
+        // this.setState({
+        //   date: new Date()
+        // })
+        this.setState((state, props) => {
+          return {
+            date: new Date()
+          }
+        })
+      }
+
+      render() {
+        return (
+          <div>
+            <h1>Hello, world!</h1>
+            <FormattedDate date={this.state.date} />
+            <h3>It is {this.state.date.toLocaleTimeString()}</h3>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <Clock />,
+      document.getElementById('root')
+    );
+  </script>
+</body>
+
+</html>

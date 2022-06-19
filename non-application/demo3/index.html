@@ -1,0 +1,51 @@
+<!--
+ * @Author: Sirius-kk
+ * @Date: 2022-06-01 23:10:00
+ * @LastEditors: Sirius-kk
+ * @LastEditTime: 2022-06-01 23:22:11
+ * @FilePath: \React\React_basic\non-application\demo3\index.html
+-->
+<!-- 
+  JSX语法糖和JSX预处理器
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+
+<body>
+  <!-- We will put our React component inside this div. -->
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function MyApp() {
+      return <h1>Hello, world!</h1>;
+    }
+    // react-dom@16版本写法
+    const container = document.getElementById('root');
+    const e = React.createElement;
+    ReactDOM.render(e(MyApp), container);
+
+    // react-dom@18版本写法
+    // const root = ReactDOM.createRoot(container);
+    // root.render(<MyApp />);
+  </script>
+
+  <!-- Load React. -->
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> -->
+
+</body>
+
+</html>

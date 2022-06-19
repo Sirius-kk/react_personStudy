@@ -1,0 +1,94 @@
+<!--
+ * @Author: Sirius-kk
+ * @Date: 2022-06-07 21:41:04
+ * @LastEditors: Sirius-kk
+ * @LastEditTime: 2022-06-08 09:25:40
+ * @FilePath: \React_basic\non-application\demo4-组件&props\index.html
+-->
+<!-- 
+  组件
+  组合组件
+  提取组件
+  props的只读性
+    所有react组件都要像纯函数一样保护自己的参数
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- We will put our React component inside this div. -->
+  <div id="container"></div>
+
+  <!-- Load React. -->
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- Load our React component. -->
+  <script type="text/babel">
+    // 组件
+    class Welcome1 extends React.Component {
+      render() {
+        return <h1>Hello1, {this.props.name}</h1>
+      }
+    }
+    function Welcome2(props) {
+      return <h1>Hello2, {props.name}</h1>
+    }
+    // 组合组件
+    function App() {
+      return (
+        <div>
+          <Welcome1 name='Sirius-kk1' />
+          <Welcome2 name='Sirius-kk2' />
+        </div>
+      )
+    }
+    // 提取组件
+    function Comment(props) {
+      return (
+        <div className="Comment">
+          <UserInfo user={props.author} />
+          <div className="Comment-text">
+            {props.text}
+          </div>
+          <div className="Comment-date">
+            {formatDate(props.date)}
+          </div>
+        </div>
+      )
+    }
+    function Avatar(props) {
+      return <img className="Avatar"
+        src={props.user.avatarUrl}
+        alt={props.user.name}
+      />
+    }
+    function UserInfo(props) {
+      return (
+        <div className="UserInfo">
+          <Avatar user={props.user} />
+          <div className="UserInfo-name">
+            {props.user.name}
+          </div>
+        </div>
+      )
+    }
+    const elem = <App />
+
+    ReactDOM.render(
+      elem,
+      document.getElementById('container')
+    )
+  </script>
+</body>
+
+</html>

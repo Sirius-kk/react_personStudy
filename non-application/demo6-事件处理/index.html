@@ -1,0 +1,87 @@
+<!--
+ * @Author: Sirius-kk
+ * @Date: 2022-06-16 08:13:21
+ * @LastEditors: Sirius-kk
+ * @LastEditTime: 2022-06-17 08:22:48
+ * @FilePath: \React_basic\non-application\demo6-事件处理\index.html
+-->
+<!-- 
+  1. 事件处理去区别 相较于HTML
+    1） 命名规范， html是小写 React中是小驼峰命名
+    2） 阻止默认事件， html中可以使用reture一个false进行阻止 而React不行，必须显性的使用 preventDefault 
+    3） 事件传递， html使用字符串 React的JSX接收一个函数
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+    function ActionLink() {
+      function handleClick(e) {
+        // 阻止默认事件
+        e.preventDefault();
+        console.log("🚀 => handleClick => e", e)
+        console.log('点击a标签')
+        console.log(this)
+      }
+
+      return (
+        <a onClick={handleClick} href="https://www.baidu.com/?tn=78000241_56_hao_pg">链接</a>
+      )
+    }
+
+    class Toggle extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          isToggleOn: true
+        };
+        this.handleClick = this.handleClick.bind(this);
+      }
+      handleClick(e) {
+        console.log("🚀 => e", e)
+        console.log(this)
+        this.setState({
+          isToggleOn: !this.state.isToggleOn
+        })
+      }
+
+      // state = {
+      //   isToggleOn: true
+      // }
+
+      // handleClick = (e) => {
+      //   console.log("🚀 => e", e)
+      //   this.setState({
+      //     isToggleOn: !this.state.isToggleOn
+      //   })
+      // }
+
+      render() {
+        // return <button onClick={(e) => this.handleClick.call(this, e)}>
+        return <button onClick={this.handleClick}>
+          {this.state.isToggleOn ? 'OFF' : 'ON'}
+        </button>
+      }
+    }
+
+
+    ReactDOM.render(
+      <Toggle />,
+      document.getElementById('root')
+    )
+  </script>
+</body>
+
+</html>

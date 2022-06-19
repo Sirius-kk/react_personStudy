@@ -1,0 +1,35 @@
+<!--
+ * @Author: Sirius-kk
+ * @Date: 2022-06-17 07:55:01
+ * @LastEditors: Sirius-kk
+ * @LastEditTime: 2022-06-17 08:19:08
+ * @FilePath: \React_basic\non-application\demo6-事件处理\htmlIndex.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>常规HTML的事件处理</title>
+</head>
+
+<body>
+  <h2>这是一个普通的HTML页面</h2>
+  <button onclick="alert('点击按钮')">普通按钮1</button>
+  <button onclick="btnClick()">普通按钮2</button>
+  <a target="_blank" href="https://www.baidu.com/?tn=78000241_56_hao_pg"
+    onclick="console.log('这是a标签');return false">a标签</a>
+
+  <script>
+    function btnClick() {
+      // arguments.callee 指回事件本身
+      console.log("🚀 => btnClick => event",)
+      // arguments.callee()
+      console.log('触发按钮事件')
+    }
+  </script>
+</body>
+
+</html>
