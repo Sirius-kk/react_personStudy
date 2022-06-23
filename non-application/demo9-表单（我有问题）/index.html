@@ -1,0 +1,106 @@
+<!--
+ * @Author: Sirius-kk
+ * @Date: 2022-06-23 07:51:20
+ * @LastEditors: Sirius-kk
+ * @LastEditTime: 2022-06-23 13:00:25
+ * @FilePath: \React_basic\non-application\demo9-表单（我有问题）\index.html
+-->
+
+<!-- 
+  为什么拿到的 e 中没有任何input的信息 
+  可以继续输入的原因可能是因为 e.target.value为一个undefined 受控组件的value为undefined或者null时 是可以继续编辑的
+  但是在打印this时可以注意到this.state中的对应值确实是实时更新的
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>表单</title>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function TraditionForm01() {
+
+      return <form>
+        <label>
+          名字：
+          <input type="text" name="name" />
+        </label>
+        <input type="submit" value="提交" />
+      </form>
+    }
+    class TraditionForm02 extends React.Component {
+      constructor(porps) {
+        super();
+        this.state = {
+          value: 'valuye',
+          inpValue: ''
+        };
+        this.handleInpChange = this.handleInpChange.bind(this)
+        this.handleChange = this.handleChange.bind(this);
+      }
+
+      handleFormSubmit() {
+        e.preventDefault();
+        console.log(this.state)
+        debugger
+      }
+
+      handleChange(event) {
+        console.log("🚀 => handleChange => event", event)
+        console.log("🚀 => handleChange => this", this)
+        this.setState({ value: event.target.value });
+      }
+
+      handleInpChange(e) {
+        this.setState({
+          inpValue: e.target.value,
+        })
+        // this.setState((s, p) => {
+        //   console.log("🚀 => this.setState => s", s)
+        //   console.log("🚀 => this.setState => p", p)
+        //   return {
+        //     inpValue: e.target.value,
+        //     value: 2
+        //   }
+        // })
+      }
+
+      render() {
+        return <form onSubmit={(e) => this.handleFormSubmit(e)}>
+          <label>
+            名字：
+            <input type="text" value={this.state.inpValue} />
+            <input type="text" value={this.state.inpValue} onChange={(e) => this.handleInpChange(e)} />
+            <input type="text" value={this.state.value} onChange={(e) => this.handleChange(e)} />
+          </label>
+          <input type="submit" value="提交2" onClick={() => { console.log(this.state) }} />
+        </form>
+      }
+    }
+    class TraditionForm03 extends React.Component {
+
+      render() {
+        return <input type="text" value={null} />
+      }
+    }
+
+    ReactDOM.render(
+      <TraditionForm02 />,
+      document.getElementById('root')
+    )
+  </script>
+
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</body>
+
+</html>

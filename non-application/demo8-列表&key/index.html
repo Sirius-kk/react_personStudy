@@ -1,0 +1,54 @@
+<!--
+ * @Author: Sirius-kk
+ * @Date: 2022-06-22 08:29:08
+ * @LastEditors: Sirius-kk
+ * @LastEditTime: 2022-06-22 13:01:55
+ * @FilePath: \React_basic\non-application\demo8-列表&key\index.html
+-->
+<!-- 
+  唯一标识key
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>列表&Key</title>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function Example01() {
+      const arr = [1, 2, 3];
+      const listItem = arr.map(item => <li>{item}. 你好</li>);
+      return <ul>{listItem}</ul>
+    }
+    function Example02(props) {
+      const numbers = props.numbers;
+      const listItem = numbers.map(item => <li>{item}. 你好</li>);
+      return <ul>{listItem}</ul>
+    }
+    function ListItem(props) {
+      return <li>{props.item}. 你好呀</li>
+    }
+    function Example03(props) {
+      const numbers = props.numbers;
+      return <ul>{numbers.length > 0 && numbers.map(item => <ListItem key={item.toString()} item={item} />)}</ul>
+    }
+
+    const numbers = [1, 2, 3, 4];
+    ReactDOM.render(
+      <Example03 numbers={numbers} />,
+      document.getElementById('root'),
+    )
+  </script>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</body>
+
+</html>
